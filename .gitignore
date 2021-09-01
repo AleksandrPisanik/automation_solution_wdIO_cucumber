@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Test reports
+reports/screenshots/*.png
+reports/html/*.html
+reports/json/*.json

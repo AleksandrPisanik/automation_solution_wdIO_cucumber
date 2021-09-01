@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/AleksandrPisanik/automation_solution_wdIO_cucumber#readme",
   "dependencies": {
-    "@wdio/cli": "^7.11.1"
+    "@cucumber/cucumber": "^7.3.1",
+    "@wdio/cli": "^7.11.1",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@wdio/cucumber-framework": "^7.11.0",

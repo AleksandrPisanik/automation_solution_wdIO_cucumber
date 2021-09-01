@@ -1,3 +1,7 @@
+const fs = require('fs');
+
+const logDir = 'logs/log.log';
+
 exports.config = {
   runner: 'local',
   specs: [
@@ -27,5 +31,13 @@ exports.config = {
       tagExpression: '@automated',
       timeout: 60000,
       ignoreUndefinedDefinitions: false
+    },
+
+    onPrepare: function() {
+      fs.access(logDir, fs.constants.F_OK, (err) => {
+        if(!err) {
+          fs.unlinkSync(logDir);
+        }
+      });
     }
 }
