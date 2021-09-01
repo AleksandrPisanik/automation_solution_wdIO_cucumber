@@ -1,0 +1,29 @@
+{
+  "name": "automation_solution_wdio_cucumber",
+  "version": "1.0.0",
+  "description": "Automation solution for WEB-testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AleksandrPisanik/automation_solution_wdIO_cucumber.git"
+  },
+  "keywords": [
+    "wdio",
+    "cucumber",
+    "UItesting",
+    "chai",
+    "automation"
+  ],
+  "author": "Aleksandr Pisanik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AleksandrPisanik/automation_solution_wdIO_cucumber/issues"
+  },
+  "homepage": "https://github.com/AleksandrPisanik/automation_solution_wdIO_cucumber#readme",
+  "dependencies": {
+    "@wdio/cli": "^7.11.1"
+  }
+}
