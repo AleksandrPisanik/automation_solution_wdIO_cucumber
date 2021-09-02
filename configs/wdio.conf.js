@@ -1,6 +1,14 @@
-const fs = require('fs');
+const wdioParallel = require('wdio-cucumber-parallel-execution');
+const reporter = require('cucumber-html-reporter');
+const getOption = require('../reports/cucumberReportOptions');
+const FileUtil = require('../src/framework/utils/file.util');
 
-const logDir = 'logs/log.log';
+const LOG_DIR = 'logs/log.log';
+const REPORT_DIR = 'reports/json/';
+const HTML_REPORT_DIR = 'reports/html/';
+const SCREEN_DIR = 'reports/screenshots/';
+
+const BROWSER_NAME_REGEX = /^.*wdio\.(.*)\.conf.*$/;
 
 exports.config = {
   runner: 'local',
@@ -34,10 +42,22 @@ exports.config = {
     },
 
     onPrepare: function() {
-      fs.access(logDir, fs.constants.F_OK, (err) => {
-        if(!err) {
-          fs.unlinkSync(logDir);
-        }
+      FileUtil.deleteFile(LOG_DIR);
+      FileUtil.createFolder(REPORT_DIR);
+      FileUtil.createFolder(HTML_REPORT_DIR);
+      FileUtil.reCreateFolder(SCREEN_DIR);
+    },
+
+    onComplete: function() {
+      const consolidatedJsonArray = wdioParallel.getConsolidatedData({
+        parallelExecutionReportDirectory: REPORT_DIR
       });
+
+      const jsonReportFile = `${REPORT_DIR}report.json`;
+      FileUtil.writeToFile(jsonReportFile, JSON.stringify(consolidatedJsonArray));
+
+      const browserName = process.env.npm_lifecycle_script.match(BROWSER_NAME_REGEX)[1];
+
+      reporter.generate(getOption(jsonReportFile, browserName));
     }
 }
